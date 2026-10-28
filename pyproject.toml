@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "file-organizer"
+version = "1.0.0"
+description = "Sort the files of a folder into category subfolders, safely and with undo."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+keywords = ["files", "organizer", "cleanup", "downloads"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Environment :: X11 Applications :: Qt",
+    "Environment :: Console",
+    "Topic :: Desktop Environment :: File Managers",
+    "Topic :: Utilities",
+]
+# The engine and the command line only use the standard library.
+dependencies = []
+
+[project.optional-dependencies]
+gui = ["PySide6>=6.8,<7.0"]
+dev = ["pytest>=8.0", "PySide6>=6.8,<7.0"]
+build = ["pyinstaller>=6.0", "PySide6>=6.8,<7.0"]
+
+[project.scripts]
+file-organizer-cli = "file_organizer.cli:main"
+
+[project.gui-scripts]
+file-organizer = "file_organizer.gui:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
